@@ -12,8 +12,8 @@ One of the guidelines for this assignment was to design the system as a composit
 ![image](https://github.com/avivS12/ruleEngine/assets/150012956/f951437d-8327-47fd-8eec-3ee48c1e5616)
 
 ## Challenges
-    Firstly, research and learn new technologies. While writing this project i got to learn and apply new knowledge about micro services, message brokers, and non-sql dbms (mongo db).
-    Secondly, i had to design the system, write the classes and define the relations between them, i have tried to write reusable and abstract classes. After that i had the general picture ready (i had basic theoretical understanding, i had the components for my project), and i felt ready to implement it.
+Firstly, research and learn new technologies. While writing this project i got to learn and apply new knowledge about micro services, message brokers, and non-sql dbms (mongo db).
+Secondly, i had to design the system, write the classes and define the relations between them, i have tried to write reusable and abstract classes. After that i had the general picture ready (i had basic theoretical understanding, i had the components for my project), and i felt ready to implement it.
 
     In addition i wanted to enable non software engeneers to be able to write rules. for that purpose i wrote the RuleMeneger class which reads rules from a csv file. To acheive dynamic rule adding ability i wanted to create an observer that will detect changes in the file (such as new lines of rules that were added) and update the rules of the RuleManager auotomatically. I did not had the time to complete that feature. 
 
