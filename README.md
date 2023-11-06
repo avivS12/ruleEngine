@@ -13,7 +13,7 @@ RuleEngine class enables the user to check events received from a message broker
 
 1. Ctor :
      
-   signiture: ```public RuleEngine(String amqpUrlAlert, String queueNameAlert, String amqpUrl, String queueName, String dbUri, String dbName) throws IOException, TimeoutException```
+   signature: ```public RuleEngine(String amqpUrlAlert, String queueNameAlert, String amqpUrl, String queueName, String dbUri, String dbName) throws IOException, TimeoutException```
    
     takes as parameters:
     @ data for establishing connection to rabbitmq queue for alert sending, through which the Alert microService will alert events matching    
@@ -30,7 +30,8 @@ RuleEngine class enables the user to check events received from a message broker
             RuleEngine ruleEngine = new RuleEngine("amqp://guest:guest@localhost:5672/","AlertQueue", "amqp://guest:guest@localhost:5672/", "PQ", "mongodb://localhost:27017", "DatabaseTest");
 
      
-3. Run RuleEngine
+2. Run RuleEngine
+   signature: ```public void run()```
     as soon as the ctor is completed, the RuleEngine object is ready to run. 
     while running the RuleEngine object retreives messages from the message broker, 
     checks them against the defined rules, alerts if necessary and logs them in the  
@@ -46,15 +47,27 @@ RuleEngine class enables the user to check events received from a message broker
         thread.start();
 
 
-4. Shutdown RuleEngine
+3. Shutdown RuleEngine
+   signature: ```public void shutDown()```
     when user wishes to shutdown the RuleEngine he can call the shutdown method.
 
     Example:
         ruleEngine.shutdown();
     
     
-5. Add new rule
-    Enables the user to define new rules.
+4. Add new rule
+   In order to add new rule, the user should open 'rules.csv' and add new rule to it by this order:
+   rule-id(int unique id)
+   vehicle-type(String for example drone)
+   check-field(String field of event which contains the target value to check/ for example "cpu". In case of a logic rule this field should contain the key word "logic").
+   operator(String "greater"/"less"/"greater or equals"/"less or equals"/"equals") in case of logical rule the field should contain "and"/"or"
+   threshold(the value which is the threashold for the rule)
+   priority(String value between 1 - 3, specifies the ergency of the event)
+   message(String the message that would be sent to the alert micro service)
+   is-time-constrain (currently unavailable, value should be "false". This field is for future infrastructure to write rules with time constrain)
+   time-duration-seconds(currently unavailable)
+   
+   Enables the user to define new rules.
     The method takes as parameters String ruleName and Rule newRule.
 
     Every Rule has to implement the Rule interface:
@@ -64,29 +77,11 @@ RuleEngine class enables the user to check events received from a message broker
         }
 
     Example:
-        Rule rule1 = new Rule() {
-                @Override
-                public boolean match(JSONObject data) {
-                    boolean ans = false;
-                    try {
-                        Object type = data.get("vehicle-type");
-                        Object cpu = data.get("cpu");
-
-                        if (type.equals("drone") && (Integer)cpu > 80) {
-                            ans = true;
-                        }
-                    }catch(JSONException ignored){}
-
-                    return ans;
-                }
-
-                @Override
-                public String message() {
-                    return "cpu of drone over 80%";
-                }
-        };
-
-        ruleEngine.addRule("cpuOver80",rule1);
+       1, drone, cpu, greater, 80, 1, cpu over 80, false, 0
+       2, drone, battery, less, 30, 1, battery less then 30 percent, false, 0
+       3, drone, long, greater, 32.08545236664342, 1, longtitude over 32.08545236664342, false, 0
+       4, drone, lat, greater, 34.766925459287044, 1, latitude over 34.766925459287044, false, 0
+       5, drone, logic, and ,3 - 4, 1, combination for rules 3 + 4 location, false, 0
 
 6. Remove rule
     Enables the user to delete an existing rule.
