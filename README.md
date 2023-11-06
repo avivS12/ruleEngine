@@ -1,13 +1,21 @@
+# Event Ingestion Assignment
+This project was written as a home assignment. The main purpose of it was to design and program a system that reads evens from message broker, runs them again a set of user defined rules, and in case events matches to a onr of the rules the system alerts about that event. In addition the system should log all the ingested events in a database of my choice.
 
-# RuleEngine
+One of the guidelines of this assignment was to design the system as a composition of micro-services. In light of that, i designed two different services:
+1. RuleEngine - which pulls events from the message broker, checks them against the rules, and if necessary sends the event to the alerts queue in the message broker.
+2. AlertMicroService - pulls events from the alerts queue and carries out some business logic (in this project it prints the rules' message, but it can take any consumer the user wishes to execute).
 
-RuleEngine class enables the user to check events received from a message broker against a set of user defined rules, and raise an alert in case an event complies with a rule. Every event is logged in a Mongodb database. 
+## System Flow Chart
+![image](https://github.com/avivS12/ruleEngine/assets/150012956/5c8b3694-22b1-4a3a-9a5e-dd7ab380a14a)
+
+## Class Diagram
+![image](https://github.com/avivS12/ruleEngine/assets/150012956/f951437d-8327-47fd-8eec-3ee48c1e5616)
 
 ## Technologies
     RabbitMQ
     Mongodb
     Java
-    
+
 ## Dependencies
     https://mvnrepository.com/artifact/org.json/json
     https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver
@@ -17,8 +25,13 @@ RuleEngine class enables the user to check events received from a message broker
 
 ## prerequisitions
     Before using this project, the user should first activate mongodb (use this command: sudo systemctl status mongod) and rabbitMQ server.
+
     
-## How to Use RuleEngine class
+## RuleEngine
+    RuleEngine class enables the user to check events received from a message broker against a set of user defined rules, and raise an alert in case      an event complies with a rule. Every event is logged in a Mongodb database. 
+
+
+### How to Use RuleEngine class
 
 1. Ctor :
      
@@ -86,7 +99,7 @@ RuleEngine class enables the user to check events received from a message broker
        4, drone, lat, greater, 34.766925459287044, 1, latitude over 34.766925459287044, false, 0
        5, drone, logic, and ,3 - 4, 1, combination for rules 3 + 4 location, false, 0
 
-## Badges
+### Badges
 
 Add badges from somewhere like: [shields.io](https://shields.io/)
 
@@ -94,14 +107,7 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 [![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
 
-
-## Acknowledgements
-
- - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
- - [Awesome README](https://github.com/matiassingers/awesome-readme)
- - [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
-
-## Color Reference
+### Color Reference
 
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
@@ -111,7 +117,7 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 | Example Color | ![#00d1a0](https://via.placeholder.com/10/00b48a?text=+) #00d1a0 |
 
 
-## Features
+### Features
 
 - Light/dark mode toggle
 - Live previews
