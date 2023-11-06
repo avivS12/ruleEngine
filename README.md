@@ -17,7 +17,6 @@ Secondly, i had to design the system, write the classes and define the relations
 
 In addition i wanted to enable non software engeneer users to write rules for the system. For that purpose i coded the RuleMeneger class to read defined rules from a csv file, and build them into Rule objects for the system. Through this csv file users can add rules (see "Add new rule" down below). To acheive dynamic rule adding ability i wanted to create an observer that will detect changes in the file (such as new lines of rules that were added) and update the rules of the RuleManager auotomatically. I did not had the time to complete that feature. 
 
-
 ## Technologies
     RabbitMQ
     Mongodb
@@ -30,9 +29,14 @@ In addition i wanted to enable non software engeneer users to write rules for th
     https://mvnrepository.com/artifact/org.slf4j/slf4j-api
     https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
 
-## prerequisitions
+## Prerequisitions
     Before using this project, the user should first activate mongodb (use this command: sudo systemctl status mongod) and rabbitMQ server.
 
+## How to Run
+    in Test file you can run 3 files:
+    1. SendEventTest - simulates a simple event from a drone.
+    2. RuleEngineTest - runs a RuleEngine object and shutdown after a few seconds
+    3. AlretMicroServiceTest - run a RabbitReceiver reads nessages from alert queue and prins them to stdout.
     
 ## RuleEngine
     RuleEngine class enables the user to check events received from a message broker against a set of user defined rules, and raise an alert in case      an event complies with a rule. Every event is logged in a Mongodb database. 
