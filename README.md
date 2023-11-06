@@ -1,5 +1,5 @@
 # Event Ingestion Assignment
-This project was written as a home assignment. The main purpose of it was to design and program a system that reads evens from message broker, runs them again a set of user defined rules, and in case events matches to a onr of the rules the system alerts about that event. In addition the system should log all the ingested events in a database of my choice.
+This project was written as a home assignment. The main purpose of it is to design and write a system that reads evens from message broker, runs them again a set of user defined rules, and in case events matches to a onr of the rules the system alerts about that event. In addition the system should log all the ingested events in a database of my choice.
 
 One of the guidelines of this assignment was to design the system as a composition of micro-services. In light of that, i designed two different services:
 1. RuleEngine - which pulls events from the message broker, checks them against the rules, and if necessary sends the event to the alerts queue in the message broker.
@@ -10,6 +10,10 @@ One of the guidelines of this assignment was to design the system as a compositi
 
 ## Class Diagram
 ![image](https://github.com/avivS12/ruleEngine/assets/150012956/f951437d-8327-47fd-8eec-3ee48c1e5616)
+
+## Challenges
+    Firstly - learn new thechnologiws. While writing this project i got to study 
+
 
 ## Technologies
     RabbitMQ
