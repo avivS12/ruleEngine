@@ -1,7 +1,7 @@
 # Event Ingestion Assignment
-This project was written as a home assignment. The main purpose of it is to design and write a system that reads evens from message broker, runs them again a set of user defined rules, and in case events matches to a onr of the rules the system alerts about that event. In addition the system should log all the ingested events in a database of my choice.
+This project was written as a home assignment. The main purpose of it is to design and write a system that reads evens from a message broker, runs them against a set of user defined rules, and in case an event matches one of the rules the system alerts about that event. In addition the system should log all the ingested events in a database of my choice.
 
-One of the guidelines of this assignment was to design the system as a composition of micro-services. In light of that, i designed two different services:
+One of the guidelines for this assignment was to design the system as a composition of micro-services. In light of that, i designed two different services:
 1. RuleEngine - which pulls events from the message broker, checks them against the rules, and if necessary sends the event to the alerts queue in the message broker.
 2. AlertMicroService - pulls events from the alerts queue and carries out some business logic (in this project it prints the rules' message, but it can take any consumer the user wishes to execute).
 
