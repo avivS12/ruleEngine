@@ -12,14 +12,15 @@ One of the guidelines of this assignment was to design the system as a compositi
 ## Class Diagram
 ![image](https://github.com/avivS12/ruleEngine/assets/150012956/f951437d-8327-47fd-8eec-3ee48c1e5616)
 
-# RuleEngine
-
-RuleEngine class enables the user to check events received from a message broker against a set of user defined rules, and raise an alert in case an event complies with a rule. Every event is logged in a Mongodb database. 
-
 ## Technologies
     RabbitMQ
     Mongodb
     Java
+
+## RuleEngine
+
+RuleEngine class enables the user to check events received from a message broker against a set of user defined rules, and raise an alert in case an event complies with a rule. Every event is logged in a Mongodb database. 
+
 
 
 ## How to Use RuleEngine class
@@ -111,13 +112,6 @@ RuleEngine class enables the user to check events received from a message broker
     https://mvnrepository.com/artifact/com.rabbitmq/amqp-client
     https://mvnrepository.com/artifact/org.slf4j/slf4j-api
     https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
-
-
-
-
-
-
-
 
 
 ## Badges
