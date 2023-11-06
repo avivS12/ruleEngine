@@ -30,7 +30,7 @@ RuleEngine class enables the user to check events received from a message broker
     @ data for establishing connection to rabbitmq queue for receiving events.
     @ data for for updating MongoDb database.
     
-    in case of a failure while establishing all the necessary connections Ctor will 
+    in case of a failure during establishing the necessary connections - Ctor will 
     throw an IOException.
     
     Example:
@@ -58,7 +58,7 @@ RuleEngine class enables the user to check events received from a message broker
 
 3. Shutdown RuleEngine
    signature: ```public void shutDown()```
-    when user wishes to shutdown the RuleEngine he can call the shutdown method.
+    when user wants to shutdown the RuleEngine the shutdown will close all open sources.
 
     Example:
         ruleEngine.shutdown();
