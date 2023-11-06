@@ -49,10 +49,10 @@ In addition i wanted to enable non software engeneer users to write rules for th
    signature: ```public RuleEngine(String amqpUrlAlert, String queueNameAlert, String amqpUrl, String queueName, String dbUri, String dbName) throws IOException, TimeoutException```
    
     takes as parameters:
-    @ data for establishing connection to rabbitmq queue for alert sending, through which the Alert microService will alert events matching    
+    1. data for establishing connection to rabbitmq queue for alert sending, through which the Alert microService will alert events matching    
     the defined rules.
-    @ data for establishing connection to rabbitmq queue for receiving events.
-    @ data for for updating MongoDb database.
+    2. data for establishing connection to rabbitmq queue for receiving events.
+    3. data for for updating MongoDb database.
     
     in case of a failure during establishing the necessary connections - Ctor will 
     throw an IOException.
