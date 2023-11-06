@@ -12,8 +12,8 @@ RuleEngine class enables the user to check events received from a message broker
 ## How to Use RuleEngine class
 
 1. Ctor :
-   signiture: ```    public RuleEngine(String amqpUrlAlert, String queueNameAlert, String amqpUrl, String queueName, String dbUri, String dbName) throws IOException, TimeoutException {
-```
+   signiture: ```public RuleEngine(String amqpUrlAlert, String queueNameAlert, String amqpUrl, String queueName, String dbUri, String dbName) throws IOException, TimeoutException```
+   
     takes as parameters:
     @ data for establishing connection to rabbitmq queue for alert sending, through which the Alert microService will alert events matching    
     the defined rules.  
