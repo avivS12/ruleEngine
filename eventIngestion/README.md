@@ -1,4 +1,10 @@
 
+# Event Ingestion Assignment
+This project was written as a home assignment. The main purpose of it was to design and program a system that reads evens from message broker, runs them again a set of user defined rules, and in case events matches to a onr of the rules the system alerts about that event. In addition the system should log all the ingested events in a database of my choice.
+
+One of the guidelines were to design the system as a composition of micro-services. In that light i design two different services:
+1. RuleEngine - which pulls events from the message broker, checks them against the rules and if necessary sends the event to the alerts queue in the message broker.
+2. 
 
 # RuleEngine
 
@@ -15,7 +21,7 @@ RuleEngine class enables the user to check events received from a message broker
 1. Ctor:
     takes as parameters:
     @ data for establishing connection to rabbitmq queue for alert sending, through which the Alert microService will alert events matching    
-    the defined rules.  
+    the defined rules.
     @ data for establishing connection to rabbitmq queue for receiving events.
     @ data for for establishing connection to MongoDb database.
     
@@ -28,7 +34,7 @@ RuleEngine class enables the user to check events received from a message broker
             RuleEngine ruleEngine = new RuleEngine("amqp://guest:guest@localhost:5672/","AlertQueue", "amqp://guest:guest@localhost:5672/", "PQ", "mongodb://localhost:27017", "DatabaseTest");
 
      
-2. Run RuleEngine
+3. Run RuleEngine
     as soon as the ctor is completed, the RuleEngine object is ready to run. 
     while running the RuleEngine object retreives messages from the message broker, 
     checks them against the defined rules, alerts if necessary and logs them in the  
@@ -44,14 +50,14 @@ RuleEngine class enables the user to check events received from a message broker
         thread.start();
 
 
-3. Shutdown RuleEngine
+4. Shutdown RuleEngine
     when user wishes to shutdown the RuleEngine he can call the shutdown method.
 
     Example:
         ruleEngine.shutdown();
     
     
-4. Add new rule
+5. Add new rule
     Enables the user to define new rules.
     The method takes as parameters String ruleName and Rule newRule.
 
@@ -86,7 +92,7 @@ RuleEngine class enables the user to check events received from a message broker
 
         ruleEngine.addRule("cpuOver80",rule1);
 
-5. Remove rule
+6. Remove rule
     Enables the user to delete an existing rule.
     
     Example:
