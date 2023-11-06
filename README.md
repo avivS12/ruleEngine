@@ -50,7 +50,7 @@ In addition i wanted to enable non software engeneer users to write rules for th
    
     takes as parameters:
     @ data for establishing connection to rabbitmq queue for alert sending, through which the Alert microService will alert events matching    
-    the defined rules.  
+    the defined rules.
     @ data for establishing connection to rabbitmq queue for receiving events.
     @ data for for updating MongoDb database.
     
@@ -63,7 +63,7 @@ In addition i wanted to enable non software engeneer users to write rules for th
             RuleEngine ruleEngine = new RuleEngine("amqp://guest:guest@localhost:5672/","AlertQueue", "amqp://guest:guest@localhost:5672/", "PQ", "mongodb://localhost:27017", "DatabaseTest");
 
      
-2. Run RuleEngine
+3. Run RuleEngine
    signature: ```public void run()```
     as soon as the ctor is completed, the RuleEngine object is ready to run. 
     while running the RuleEngine object retreives messages from the message broker, 
@@ -80,7 +80,7 @@ In addition i wanted to enable non software engeneer users to write rules for th
         thread.start();
 
 
-3. Shutdown RuleEngine
+4. Shutdown RuleEngine
    signature: ```public void shutDown()```
     when user wants to shutdown the RuleEngine the shutdown will close all open sources.
 
@@ -88,7 +88,7 @@ In addition i wanted to enable non software engeneer users to write rules for th
         ruleEngine.shutdown();
     
     
-4. Add new rule
+5. Add new rule
    Currently rules can be added through the 'rule.csv' file. The main concern is to enable non-software engeneers to add rules, without the need to write a piece of code in order to do so. Currently users can write rules before running the system. The primary intent is to create an observer that will observe this file, and updates occurs the observer will reload it, so new rule will be added automatically.
    
    In order to add new rule, the user should open 'rules.csv' and add new rule to it by this order:
