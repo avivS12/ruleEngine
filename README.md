@@ -7,8 +7,17 @@ RuleEngine class enables the user to check events received from a message broker
     RabbitMQ
     Mongodb
     Java
+    
+## Dependencies
+    https://mvnrepository.com/artifact/org.json/json
+    https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver
+    https://mvnrepository.com/artifact/com.rabbitmq/amqp-client
+    https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
 
-
+## prerequisitions
+    Before using this project, the user should first activate mongodb (use this command: sudo systemctl status mongod) and rabbitMQ server.
+    
 ## How to Use RuleEngine class
 
 1. Ctor :
@@ -19,7 +28,7 @@ RuleEngine class enables the user to check events received from a message broker
     @ data for establishing connection to rabbitmq queue for alert sending, through which the Alert microService will alert events matching    
     the defined rules.  
     @ data for establishing connection to rabbitmq queue for receiving events.
-    @ data for for establishing connection to MongoDb database.
+    @ data for for updating MongoDb database.
     
     in case of a failure while establishing all the necessary connections Ctor will 
     throw an IOException.
@@ -56,25 +65,19 @@ RuleEngine class enables the user to check events received from a message broker
     
     
 4. Add new rule
-   In order to add new rule, the user should open 'rules.csv' and add new rule to it by this order:
-   rule-id(int unique id)
-   vehicle-type(String for example drone)
-   check-field(String field of event which contains the target value to check/ for example "cpu". In case of a logic rule this field should contain the key word "logic").
-   operator(String "greater"/"less"/"greater or equals"/"less or equals"/"equals") in case of logical rule the field should contain "and"/"or"
-   threshold(the value which is the threashold for the rule)
-   priority(String value between 1 - 3, specifies the ergency of the event)
-   message(String the message that would be sent to the alert micro service)
-   is-time-constrain (currently unavailable, value should be "false". This field is for future infrastructure to write rules with time constrain)
-   time-duration-seconds(currently unavailable)
+   Currently rules can be added through the 'rule.csv' file. The main concern is to enable non-software engeneers to add rules, without the need to write a piece of code in order to do so. Currently users can write rules before running the system. The primary intent is to create an observer that will observe this file, and updates occurs the observer will reload it, so new rule will be added automatically.
    
-   Enables the user to define new rules.
-    The method takes as parameters String ruleName and Rule newRule.
+   In order to add new rule, the user should open 'rules.csv' and add new rule to it by this order:
+   * rule-id(int unique id)
+   * vehicle-type(String for example drone)
+   * check-field(String field of event which contains the target value to check/ for example "cpu". In case of a logic rule this field should contain the key word "logic").
+   * operator(String "greater"/"less"/"greater or equals"/"less or equals"/"equals") in case of logical rule the field should contain "and"/"or"
+   * threshold(the value which is the threashold for the rule)
+   * priority(String value between 1 - 3, specifies the ergency of the event)
+   * message(String the message that would be sent to the alert micro service)
+   * is-time-constrain (currently unavailable, value should be "false". This field is for future infrastructure to write rules with time constrain)
+   * time-duration-seconds(currently unavailable)
 
-    Every Rule has to implement the Rule interface:
-        interface Rule {
-            boolean match(JSONObject data);
-            String message();
-        }
 
     Example:
        1, drone, cpu, greater, 80, 1, cpu over 80, false, 0
@@ -82,28 +85,6 @@ RuleEngine class enables the user to check events received from a message broker
        3, drone, long, greater, 32.08545236664342, 1, longtitude over 32.08545236664342, false, 0
        4, drone, lat, greater, 34.766925459287044, 1, latitude over 34.766925459287044, false, 0
        5, drone, logic, and ,3 - 4, 1, combination for rules 3 + 4 location, false, 0
-
-6. Remove rule
-    Enables the user to delete an existing rule.
-    
-    Example:
-        ruleEngine.removeRule("cpuOver80");
-
-
-## Dependencies
-    https://mvnrepository.com/artifact/org.json/json
-    https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver
-    https://mvnrepository.com/artifact/com.rabbitmq/amqp-client
-    https://mvnrepository.com/artifact/org.slf4j/slf4j-api
-    https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
-
-
-
-
-
-
-
-
 
 ## Badges
 
